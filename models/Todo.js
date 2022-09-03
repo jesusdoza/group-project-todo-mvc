@@ -1,10 +1,9 @@
 const mongoose = require('mongoose')
 
 const TodoSchema = new mongoose.Schema({
-  todo: {
-    type: String,
+  types: {
+    type: [String],
     required: true,
-    default:'pokemon name'
   },
   completed: {
     type: Boolean,
@@ -37,7 +36,6 @@ const TodoSchema = new mongoose.Schema({
     type:String,
     default:"pokemon description"
   }
-  
 })
 
 module.exports = mongoose.model('Todo', TodoSchema)

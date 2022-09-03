@@ -1,6 +1,7 @@
 const Todo = require('../models/Todo')
 
 module.exports = {
+
     getTodos: async (req,res)=>{  //like other todos but as part of the request
         console.log(req.user)  //have the ability to see the user who is making the request, so we see the usual request AND the logged in user
                                // we can console log and see everythign about that logged in user
@@ -17,18 +18,30 @@ module.exports = {
             console.log(err)
         }
     },
+// <<<<<<< HEAD
+//     createTodo: async (req, res)=>{
+//         try{
+//             await Todo.create({todo: req.body.todoItem, completed: false, userId: req.user.id})
+//             console.log('Card has been added!')
+//             res.redirect('/todos')
+//         }catch(err){
+//             console.log(err)
+// =======
     
     createTodo: async (req, res)=>{
         try{
+            var todoName = req.body.name.charAt(0).toUpperCase() + req.body.name.toLowerCase().slice(1) //capitalizes first letter of pokemon name
             console.log(`create todo`,req.body)
             // await Todo.create({todo: req.body.todoItem, completed: false, userId: req.user.id}) //every todo we create will always have the users id
+            
             await Todo.create({
-                todo: req.body.name, 
+                todo: todoName, 
                 completed: false, 
                 userId: req.user.id,
                 height:req.body.height,
                 weight:req.body.weight,
                 image:req.body.image,
+                types:req.body.types,
                 ability:req.body.ability,
                 attacks:req.body.attacks,
                 description:req.body.description
@@ -39,6 +52,7 @@ module.exports = {
         }catch(err){
 
             console.log(`create todo failed`,err)
+// >>>>>>> b688fee94f7d1fc83dc8fb149a130516cb1f0501
         }
     },
     markComplete: async (req, res)=>{
@@ -67,7 +81,9 @@ module.exports = {
         console.log(req.body.todoIdFromJSFile)
         try{
             await Todo.findOneAndDelete({_id:req.body.todoIdFromJSFile})
-            console.log('Deleted Todo')
+
+            console.log('Deleted Card')
+
             res.json('Deleted It')
         }catch(err){
             console.log(err)
