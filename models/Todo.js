@@ -4,7 +4,7 @@ const TodoSchema = new mongoose.Schema({
   todo: {
     type: String,
     required: true,
-    defualt:'pokemon name'
+    default:'pokemon name'
   },
   completed: {
     type: Boolean,
