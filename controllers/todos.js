@@ -35,7 +35,7 @@ module.exports = {
             // await Todo.create({todo: req.body.todoItem, completed: false, userId: req.user.id}) //every todo we create will always have the users id
             
             await Todo.create({
-                name: req.body.name, 
+                todo: todoName, 
                 favorite: false, 
                 userId: req.user.id,
                 height:req.body.height,
@@ -97,8 +97,8 @@ module.exports = {
         // console.log(`user id: `,req.user.id)
         try{
 
-            //todo **** verify userId of card matches user from request
-            //! do not want users making others cards public
+            /// todo **** verify userId of card matches user from request
+            /// do not want users making others cards public****
 
              const card = await Todo.findOne({_id:req.body.todoIdFromJSFile})
 
