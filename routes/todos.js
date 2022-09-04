@@ -13,4 +13,8 @@ router.put('/markNotFavorite', todosController.markNotFavorite)
 
 router.delete('/deleteTodo', todosController.deleteTodo)
 
+//add card to public pool
+router.put('/public', todosController.addToPublicCards)
+router.get('/public', todosController.getPublicCards)
+
 module.exports = router

@@ -88,5 +88,50 @@ module.exports = {
         }catch(err){
             console.log(err)
         }
-    }
+    },
+
+    //todo add card to public pool
+    addToPublicCards: async (req, res)=>{
+        console.log(`addtopublic`)
+        // console.log(`card id`,req.body.todoIdFromJSFile)
+        // console.log(`user id: `,req.user.id)
+        try{
+
+            //todo **** verify userId of card matches user from request
+            //! do not want users making others cards public
+
+             const card = await Todo.findOne({_id:req.body.todoIdFromJSFile})
+
+             //card not found error out
+            if(!card){ res.status(400).json({message:"card not found"})}
+
+           const results =  await Todo.findOneAndUpdate({
+                    _id:req.body.todoIdFromJSFile
+                },
+                {
+                    userId:"public"
+                }
+            )
+            console.log(results)
+
+            res.json({message:"added to public", results:results})
+        }catch(err){
+            console.log(`error adding card to public`,err.message)
+        }
+    },
+
+    getPublicCards: async (req, res)=>{
+        console.log(` get public user id: `)
+
+        try{
+             const cards = await Todo.find({userId:"public"})
+
+             //card not found error out
+            if(!cards){ res.status(400).json({message:"no public cards found"})}
+            res.json(cards)
+        }catch(err){
+            console.log(`error adding card to public`,err.message)
+        }
+    },
+
 }    
