@@ -1,8 +1,8 @@
 //js folder, main.js
 
 const deleteBtn = document.querySelectorAll('#delete')
-const todoItem = document.querySelectorAll('span.not')
-const todoComplete = document.querySelectorAll('span.completed')
+const todoItem = document.querySelectorAll('span.not')//creating a variable and assigning it a nodelist of spans with a NOT class
+const todoComplete = document.querySelectorAll('span.favorite')//creating a variable and assigning it a nodelist of spans with a FAVORITE class
 
 // ======= changed del class to delete id in ejs
 // const deleteBtn = document.querySelectorAll('.del')
@@ -157,11 +157,12 @@ Array.from(deleteBtn).forEach((el)=>{
 })
 
 Array.from(todoItem).forEach((el)=>{
-    el.addEventListener('click', markComplete)
+    el.addEventListener('click', markFavorite)  //event listener for markFavorite 
+    //since todoItem is a nodeList we need to turn it into an array
 })
 
 Array.from(todoComplete).forEach((el)=>{
-    el.addEventListener('click', markIncomplete)
+    el.addEventListener('click', markNotFavorite)  //event listener for markNotFavorite 
 })
 
 async function deleteTodo(){
@@ -182,10 +183,10 @@ async function deleteTodo(){
     }
 }
 
-async function markComplete(){
+async function markFavorite(){
     const todoId = this.parentNode.dataset.id
     try{
-        const response = await fetch('todos/markComplete', {
+        const response = await fetch('todos/markFavorite', {
             method: 'put',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
@@ -200,10 +201,10 @@ async function markComplete(){
     }
 }
 
-async function markIncomplete(){
+async function markNotFavorite(){
     const todoId = this.parentNode.dataset.id
     try{
-        const response = await fetch('todos/markIncomplete', {
+        const response = await fetch('todos/markNotFavorite', {
             method: 'put',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({

@@ -5,7 +5,7 @@ const TodoSchema = new mongoose.Schema({
     type: [String],
     required: true,
   },
-  completed: {
+  favorite: {
     type: Boolean,
   },
   userId: {
@@ -36,6 +36,6 @@ const TodoSchema = new mongoose.Schema({
     type:String,
     default:"pokemon description"
   }
-})
+ })
 
 module.exports = mongoose.model('Todo', TodoSchema)
