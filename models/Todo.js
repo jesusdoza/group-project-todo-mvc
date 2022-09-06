@@ -1,9 +1,11 @@
 const mongoose = require('mongoose')
 
 const TodoSchema = new mongoose.Schema({
+  todo:{
+    type:String,
+  },
   name: {
     type: String,
-    required: true,
   },
   types: {
     type: [String],

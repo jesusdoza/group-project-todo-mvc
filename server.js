@@ -1,5 +1,4 @@
 const express = require('express') //loading express
-const app = express() //can call express easily
 const mongoose = require('mongoose')
 const passport = require('passport')
 const session = require('express-session') //enables them to stay logged in 
@@ -16,9 +15,11 @@ require('dotenv').config({path: './config/.env'})
 require('./config/passport')(passport)
 
 connectDB()
+const app = express() //can call express easily
 
 app.set('view engine', 'ejs') //
 app.use(express.static('public'))
+
 
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
